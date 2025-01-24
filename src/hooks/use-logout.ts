@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
+import { deleteCookie } from "@/lib/auth"
 
 export default function useLogout() {
   const router = useRouter()
@@ -30,6 +31,7 @@ export default function useLogout() {
         console.error("Logout error:", error)
       } finally {
         // Always remove the token and show success message
+        await deleteCookie("access_token")
         localStorage.removeItem("access_token")
         toast.success("Logout successful")
         router.push("/login")
