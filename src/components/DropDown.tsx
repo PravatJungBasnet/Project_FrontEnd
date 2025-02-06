@@ -10,6 +10,7 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { CheckCheck, Copy } from "lucide-react";
+import { getCookie } from "@/lib/auth";
 
 const DropDown = () => {
   const { onSubmit: onLogout } = useLogout();
@@ -22,7 +23,7 @@ const DropDown = () => {
   }, []);
 
   const fetchApiKey = async () => {
-    const token = localStorage.getItem("access_token");
+    const token=await getCookie("access_token");
     try {
       const response = await fetch(
         //"https://puzan789-operyo.hf.space/src/apikey",
@@ -49,7 +50,7 @@ const DropDown = () => {
 
   const createApiKey = async () => {
     setLoading(true);
-    const token = localStorage.getItem("access_token");
+    const token=await getCookie("access_token");
     try {
       const response = await fetch(
         //"https://puzan789-jaerowai.hf.space/src/apikey/create",
@@ -74,7 +75,7 @@ const DropDown = () => {
   };
 
   const deleteApiKey = async () => {
-    const token = localStorage.getItem("access_token");
+    const token=await getCookie("access_token");
     try {
       const response = await fetch(
         "https://puzan789-jaerowai.hf.space/src/apikey/delete",

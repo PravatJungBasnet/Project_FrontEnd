@@ -10,6 +10,7 @@ import { IntermediateStep } from "./IntermediateStep";
 import { Button } from "./ui/button";
 import { ArrowDown, LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getCookie } from "@/lib/auth";
 
 // Define a Message type
 type Message = {
@@ -184,7 +185,7 @@ export function ChatWindow(props: {
     setInput("");
     // Post input and get response
     try {
-      const token = localStorage.getItem("access_token");
+      const token=await getCookie("access_token");
       if (!token) {
         toast.error("Authentication token not found");
       }
