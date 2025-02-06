@@ -10,14 +10,15 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { CheckCheck, Copy } from "lucide-react";
-import { getCookie } from "@/lib/auth";
-
+import { deleteCookie, getCookie } from "@/lib/auth";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation"
 const DropDown = () => {
   const { onSubmit: onLogout } = useLogout();
   const [apiKey, setApiKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [copy, setcopy] = useState(false);
-
+  const router = useRouter()
   useEffect(() => {
     fetchApiKey();
   }, []);
@@ -102,6 +103,18 @@ const DropDown = () => {
     }
   };
 
+  const onSubmit = async () => {
+    // Remove the token from storage
+    await deleteCookie("access_token");
+    localStorage.removeItem("access_token");
+  
+    // Show logout success message
+    toast.success("Logout successful");
+  
+    // Force a hard logout by redirecting to the login page
+    window.location.href = "/login";
+  };
+  
   return (
     <>
       <DropdownMenuGroup>
@@ -129,7 +142,7 @@ const DropDown = () => {
         )}
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem onClick={onLogout}>Log out</DropdownMenuItem>
+      <DropdownMenuItem onClick={onSubmit}>Log out</DropdownMenuItem>
     </>
   );
 };

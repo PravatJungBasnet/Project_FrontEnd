@@ -1,4 +1,4 @@
-/*import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import { deleteCookie } from "@/lib/auth"
 
@@ -11,6 +11,7 @@ export default function useLogout() {
     if (!token) {
       toast.success("Logout successful")
       router.push("/login")
+      console.log("Logged out")
       return;
     }
 
@@ -26,6 +27,10 @@ export default function useLogout() {
             Authorization: `Bearer ${token}`,
           },
         })
+        await deleteCookie("access_token")
+        localStorage.removeItem("access_token")
+        toast.success("Logout successful")
+        router.push("/login")
       } catch (error) {
         // Silently catch any error, do not show error message
         console.error("Logout error:", error)
@@ -41,8 +46,8 @@ export default function useLogout() {
   return { onSubmit };
   
 }
-  */
-import { useRouter } from "next/navigation";
+
+/*import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 export default function useLogout() {
@@ -83,4 +88,5 @@ export default function useLogout() {
   return { onSubmit }; // Ensure returning onSubmit
 }
 
+*/
 

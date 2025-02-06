@@ -1,3 +1,4 @@
+"use client";
 import { ActiveLink } from "@/components/ActiveLinks";
 import {
   DropdownMenu,
