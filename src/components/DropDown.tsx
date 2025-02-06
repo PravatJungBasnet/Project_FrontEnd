@@ -25,8 +25,10 @@ const DropDown = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await fetch(
-        "https://puzan789-jaerowai.hf.space/src/apikey",
+        //"https://puzan789-operyo.hf.space/src/apikey",
+        "https://puzan789-operyo.hf.space/src/apikey",
         {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -50,7 +52,8 @@ const DropDown = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await fetch(
-        "https://puzan789-jaerowai.hf.space/src/apikey/create",
+        //"https://puzan789-jaerowai.hf.space/src/apikey/create",
+        "https://puzan789-operyo.hf.space/src/apikey/create",
         {
           method: "POST",
           headers: {
@@ -102,7 +105,7 @@ const DropDown = () => {
     <>
       <DropdownMenuGroup>
         <DropdownMenuItem onClick={createApiKey}>
-          {loading ? "Loading..." : "Create Token"}
+          {loading ? "Loading..." : "Create APIkey"}
         </DropdownMenuItem>
         {apiKey && (
           <>

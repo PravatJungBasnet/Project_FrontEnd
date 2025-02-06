@@ -8,31 +8,35 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import LogOut from "./DropDown";
+import { useEffect, useState } from "react";
 
 export default function LayoutTemplate({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) 
+  {
+    const [username, setUsername] = useState<string | null>(null);
+  
+    // Fetch the username from localStorage or an API
+    useEffect(() => {
+      // Example: Replace this with your logic for fetching user data)
+      const storedUsername = localStorage.getItem("username");
+      console.log("Stored username:", storedUsername); // Assuming username is stored in localStorage
+      setUsername(storedUsername || "Guest"); // Default to "Guest" if no username is found
+    }, [username]);
+  
   return (
     <div className="bg-secondary grid grid-rows-[auto,1fr] h-[100dvh]">
       <div className="grid grid-cols-[1fr,auto] gap-2 sm:mx-10 px-4 py-2">
         <div className="flex gap-4 flex-col md:flex-row md:items-center">
-          <a
-            href="/"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="flex items-center gap-2"
-          >
-            Puzan Nepal
-          </a>
           <nav className="md:flex gap-1 flex-col md:flex-row hidden">
             <ActiveLink href="/">🏴‍☠️ Chat</ActiveLink>
           </nav>
         </div>
 
         <div className="flex justify-center items-center gap-3 ">
-          <div className="md:flex hidden">pujannepal@gmail.com</div>
+          <div className="md:flex hidden">{username}</div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Image
@@ -46,7 +50,7 @@ export default function LayoutTemplate({
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[300px] mr-4">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuLabel><div className="flex md:hidden">pujannepal@gmail.com</div></DropdownMenuLabel>
+              <DropdownMenuLabel><div className="flex md:hidden">{username}</div></DropdownMenuLabel>
               <DropdownMenuSeparator />
               <LogOut />
             </DropdownMenuContent>

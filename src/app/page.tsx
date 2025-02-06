@@ -22,11 +22,10 @@ export default function Home() {
           
           <div className=" md:pl-8">
             <h2 className="text-3xl font-bold mb-4 text-indigo-600">
-              Welcome to Our AI Chat App
-            </h2>
+            Welcome to our English-to-Nepali Language Translator!           
+             </h2>
             <p className="text-white mb-4">
-              Experience the future of conversation with our cutting-edge
-              AI-powered chat application.
+            This system helps you translate English text into Nepali quickly.
             </p>
           </div>
         </div>
@@ -35,7 +34,7 @@ export default function Home() {
           <li className="flex items-start justify-center">
             <span className="text-2xl mr-4">🚀</span>
             <span>
-              Built with the latest technologies including Next.js and advanced language models.
+              
             </span>
           </li>
         </ul>
@@ -48,7 +47,7 @@ export default function Home() {
         <ChatWindow
           endpoint="api/chat"
           emoji="💬"
-          placeholder="I'm an LLM to change english message to nepali"
+          placeholder="I'm a translator to translate english to nepali"
           emptyStateComponent={InfoCard}
         />
       </LayoutTemplate>

@@ -38,6 +38,7 @@ export default function useLogin() {
       })
 
       clearTimeout(timeoutId)
+      
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -52,6 +53,10 @@ export default function useLogin() {
 
       const result = await response.json()
       localStorage.setItem("access_token", result.access_token)
+      localStorage.setItem('username', result.username)
+      console.log(result.username)
+
+      console.log(result)
       toast.success("Login successful")
       router.push("/")
     } catch (error: unknown) {

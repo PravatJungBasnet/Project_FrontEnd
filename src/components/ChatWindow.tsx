@@ -189,7 +189,7 @@ export function ChatWindow(props: {
         toast.error("Authentication token not found");
       }
       const response = await fetch(
-        "https://puzan789-jaerowai.hf.space/translation/translate",
+        "https://puzan789-operyo.hf.space/translation/translate",
         {
           method: "POST",
           headers: {

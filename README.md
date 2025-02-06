@@ -10,7 +10,7 @@ yarn install
 ```
 Create `.env` file in root dir and add:
 ```bash
-NEXT_PUBLIC_BASE_URL=https://puzan789-jaerowai.hf.space
+NEXT_PUBLIC_BASE_URL=https://puzan789-operyo.hf.space
 ```
 
 Run server using:

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pujan Nepal ChatBot",
-  description: "A chatbot that helps you learn programming",
+  title: "Language Translator",
+  description: "A chatbot that helps to transfer English to Neplai Language",
 };
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+/*import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 
 export default function useLogout() {
@@ -10,7 +10,7 @@ export default function useLogout() {
     if (!token) {
       toast.success("Logout successful")
       router.push("/login")
-      return
+      return;
     }
 
     const userChoice = window.confirm("Are you sure you want to Logout?")
@@ -36,7 +36,49 @@ export default function useLogout() {
       }
     }
   }
-
-  return { onSubmit }
+  return { onSubmit };
+  
 }
+  */
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
+export default function useLogout() {
+  const router = useRouter();
+
+  const onSubmit = async () => {
+    const token = localStorage.getItem("access_token");
+
+    // If token doesn't exist, handle it without confirmation
+    if (!token) {
+      toast.success("Logout successful");
+      router.push("/login");
+      return;
+    }
+
+    const userChoice = window.confirm("Are you sure you want to Logout?");
+    if (userChoice) {
+      try {
+        // Attempt the API request
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.error("Logout error:", error);
+      } finally {
+        // Always remove token and redirect
+        localStorage.removeItem("access_token");
+        toast.success("Logout successful");
+        router.push("/login");
+      }
+    }
+  };
+
+  return { onSubmit }; // Ensure returning onSubmit
+}
+
 
