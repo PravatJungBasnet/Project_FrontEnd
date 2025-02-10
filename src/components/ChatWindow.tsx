@@ -156,7 +156,7 @@ export function ChatWindow(props: {
     Record<string, any>
   >({});
 
-  useEffect(() => {
+  /*useEffect(() => {
     // Load messages from local storage on component mount
     const storedMessages = localStorage.getItem("chatMessages");
     if (storedMessages) {
@@ -167,6 +167,22 @@ export function ChatWindow(props: {
   useEffect(() => {
     // Save messages to local storage whenever they change
     localStorage.setItem("chatMessages", JSON.stringify(messages));
+  }, [messages]);
+  \*/
+  useEffect(() => {
+    const userId = getCookie("user_id"); // Assume you store user_id in cookies
+    if (!userId) return;
+  
+    const storedMessages = localStorage.getItem(`chatMessages_${userId}`);
+    if (storedMessages) {
+      setMessages(JSON.parse(storedMessages));
+    }
+  }, []);
+  useEffect(() => {
+    const userId = getCookie("user_id");
+    if (!userId) return;
+  
+    localStorage.setItem(`chatMessages_${userId}`, JSON.stringify(messages));
   }, [messages]);
 
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
