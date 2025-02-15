@@ -182,7 +182,7 @@ export function ChatWindow(props: {
     const userId = getCookie("user_id");
     if (!userId) return;
   
-    localStorage.setItem(`chatMessages_${userId}`, JSON.stringify(messages));
+    sessionStorage.setItem(`chatMessages_${userId}`, JSON.stringify(messages));
   }, [messages]);
 
   async function sendMessage(e: FormEvent<HTMLFormElement>) {
